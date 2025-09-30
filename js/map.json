@@ -1,7 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 400,
-    "height": 450,
+    "height": 400,
     "title": "Wildlife sightings in 2014 Melbpurne",
     "projection": {"type": "equalEarth"},
     "layer": [
@@ -33,9 +33,11 @@
             "type": "nominal",
             "title": "Animal Family",
             "scale": {"scheme": "category10"}
-          }
+          },
+          "tooltip": [
+            {"field": "taxa", "type": "nominal", "title": "Animal Family"}
+          ]
         }
       }
     ]
-
   }
