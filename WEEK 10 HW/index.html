@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Melbourne Cafés Visualisation</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background:#f9f9f9; }
+    h1 { margin-bottom: 5px; }
+    .container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .panel { background:white; padding:15px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+    .note { font-size: 12px; color: #555; }
+  </style>
+</head>
+<body>
+  <h1>Cafés in Melbourne</h1>
+  <p class="note">Includes tooltips, annotations, and filters (slider + legend selection) as required.</p>
+
+  <div class="container">
+    <!-- Task 1: Bar chart -->
+    <div class="panel">
+      <h2>Total Seats by Suburb (filter by year)</h2>
+      <div id="vis_bar"></div>
+    </div>
+
+    <!-- Task 2: Map -->
+    <div class="panel">
+      <h2>Café Locations (filter by seating type)</h2>
+      <div id="vis_map"></div>
+    </div>
+  </div>
+
+  <script>
+  // ---------- Task 1: Interactive Bar Chart ----------
+const barSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "cafes-and-restaurants-with-seating-capacity.csv"},
+  "width": 500,
+  "height": 500,
+  "params": [
+    {
+      "name": "year_slider",
+      "value": 2023,
+      "bind": {"input": "range", "min":2011, "max":2023, "step":1, "name": "Year: "}
+    }
+  ],
+  "transform": [
+    {"filter": "datum.census_year == year_slider"},
+    {
+      "aggregate": [
+        {"op": "count", "as": "cafe_count"},
+        {"op": "sum", "field": "number_of_seats", "as": "total_seats"}
+      ],
+      "groupby": ["clue_small_area"]
+    }
+  ],
+  "encoding": {
+    "y": {"field": "clue_small_area", "type": "nominal", "sort":"-x", "title": "Suburb"},
+    "x": {"field": "total_seats", "type": "quantitative", "title":"Total Seats"},
+    "tooltip": [
+      {"field":"clue_small_area","title":"Suburb"},
+      {"field":"cafe_count","title":"Cafés"},
+      {"field":"total_seats","title":"Total Seats"}
+    ]
+  },
+  "layer": [
+    {"mark": {"type":"bar", "cornerRadiusEnd":4, "color":"#4C78A8"}},
+    {
+      "transform": [
+        {"window": [{"op":"rank","as":"rank"}], "sort":[{"field":"total_seats","order":"descending"}]},
+        {"filter":"datum.rank==1"}
+      ],
+      "mark": {"type":"text","dx":5,"align":"left","baseline":"middle","fontWeight":"bold","color":"darkred"},
+      "encoding": {
+        "x":{"field":"total_seats"},
+        "y":{"field":"clue_small_area"},
+        "text":{"value":"← Highest"}
+      }
+    }
+  ]
+};
+
+  // ---------- Task 2: Map with legend selection ----------
+  const mapSpec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "cafes-and-restaurants-with-seating-capacity.csv"},
+    "projection": {"type":"mercator","scale":130000,"center":[144.96,-37.81]},
+    "width": 500,
+    "height": 500,
+    "mark": {"type":"circle","opacity":0.8,"stroke":"white","strokeWidth":0.5},
+    "encoding": {
+      "longitude": {"field":"longitude","type":"quantitative"},
+      "latitude": {"field":"latitude","type":"quantitative"},
+      "size": {"field":"number_of_seats","type":"quantitative","title":"Seats","scale":{"range":[20,400]}},
+      "color": {"field":"seating_type","type":"nominal","title":"Seating type"},
+      "tooltip": [
+        {"field":"trading_name","title":"Café"},
+        {"field":"clue_small_area","title":"Suburb"},
+        {"field":"number_of_seats","title":"Seats"},
+        {"field":"seating_type","title":"Type"},
+        {"field":"building_address","title":"Address"}
+      ]
+    },
+    "params":[
+      {
+        "name":"seatTypeSel",
+        "select":{"type":"point","fields":["seating_type"],"on":"click","clear":"dblclick"},
+        "bind":"legend"
+      }
+    ]
+  };
+
+  // Render
+  vegaEmbed('#vis_bar', barSpec, {actions:false});
+  vegaEmbed('#vis_map', mapSpec, {actions:false});
+  </script>
+</body>
+</html>
+
