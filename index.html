@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Melbourne Cafés Visualisation</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 20px; 
+      background:#f9f9f9; 
+    }
+    h1 {margin-bottom:5px;}
+    .panel { 
+      background:white; 
+      padding:15px; 
+      margin-bottom: 20px;
+    }
+    .note{font-size:12px;color:#555;}
+  </style>
+</head>
+<body>
+  <h1>Cafés in Melbourne</h1>
+  <p class="note">Filter by year and seating type to explore café distribution across suburbs.</p>
+
+  <div class="panel">
+    <h2>Total Seats by Suburb</h2>
+    <div id="vis_bar"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Café Locations</h2>
+    <div id="vis_map"></div>
+  </div>
+
+  <script>
+  // bar chart for suburbs
+  const barSpec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 500,
+    "height": 500,
+    "data": {"url": "cafes-and-restaurants-with-seating-capacity.csv"},
+    "params": [
+      {
+        "name": "year_slider",
+        "value": 2023,
+        "bind": {
+          "input": "range", 
+          "min": 2011, 
+          "max": 2023, 
+          "step": 1, 
+          "name": "Year: "
+        }
+      }
+    ],
+    "transform": [
+      {"filter": "datum.census_year == year_slider"},
+      {
+        "aggregate": [
+          {"op": "count", "as": "cafe_count"},
+          {"op": "sum", "field": "number_of_seats", "as": "total_seats"}
+        ],
+        "groupby": ["clue_small_area"]
+      }
+    ],
+    "encoding": {
+      "y": {"field": "clue_small_area", "type": "nominal", "sort":"-x","title":"Suburb"},
+      "x": {"field": "total_seats", "type": "quantitative", "title":"Total Seats"},
+      "tooltip": [
+        {"field":"clue_small_area","title":"Suburb"},
+        {"field":"cafe_count","title":"Number of Cafés"},
+        {"field":"total_seats","title":"Total Seats"}
+      ]
+    },
+    "layer": [
+      {
+        "mark": {"type":"bar","color":"#4C78A8"}
+      },
+      {
+        "transform": [
+          {"window": [{"op":"rank","as":"rank"}], "sort":[{"field":"total_seats","order":"descending"}]},
+          {"filter": "datum.rank == 1"}
+        ],
+        "mark": {
+          "type": "text",
+          "dx": 5,
+          "align": "left",
+          "baseline":"middle",
+          "fontWeight": "bold",
+          "color":"darkred"
+        },
+        "encoding": {
+          "x": {"field":"total_seats"},
+          "y": {"field":"clue_small_area"},
+          "text": {"value": "← Highest"}
+        }
+      }
+    ]
+  };
+
+  // map with cafe locations
+  const mapSpec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width":500,
+    "height":500,
+    "data": {"url": "cafes-and-restaurants-with-seating-capacity.csv"},
+    "projection": {"type":"mercator","scale":130000,"center":[144.96,-37.81]},
+    "params": [
+      {
+        "name": "seat_type_selection",
+        "select": {"type": "point", "fields":["seating_type"]},
+        "bind": "legend"
+      }
+    ],
+    "mark": {"type":"circle"},
+    "encoding": {
+      "longitude": {"field":"longitude","type":"quantitative"},
+      "latitude": {"field":"latitude","type":"quantitative"},
+      "size": {
+        "field":"number_of_seats",
+        "type":"quantitative",
+        "title":"Seats",
+        "scale":{"range":[20,400]}
+      },
+      "color": {
+        "field":"seating_type",
+        "type":"nominal",
+        "title":"Seating Type"
+      },
+      "opacity": {
+        "condition": {"param":"seat_type_selection","value":0.8},
+        "value":0.2
+      },
+      "tooltip": [
+        {"field":"trading_name","title":"Café Name"},
+        {"field":"clue_small_area","title":"Suburb"},
+        {"field":"number_of_seats","title":"Seats"},
+        {"field":"seating_type","title":"Seating Type"},
+        {"field":"building_address","title":"Address"}
+      ]
+    }
+  };
+
+  vegaEmbed('#vis_bar', barSpec, {actions:false});
+  vegaEmbed('#vis_map', mapSpec, {actions:false});
+  </script>
+</body>
+</html>
+
