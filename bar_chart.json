@@ -7,7 +7,7 @@
     "title":"Seating Versus Suburb",
     "params": [
         {
-            "name": "Year Selection",
+            "name": "Year_Selection",
             "bind": {
                 "input": "select",
                 "options": [
@@ -48,12 +48,12 @@
                     "2003",
                     "2002"
                 ],
-                "name": "Year Selection"
+                "name": "Year_Selection"
             }
         }
     ],
     "transform": [
-        {"filter": "Year Selection == null || datum.census_year == Year Selection"},
+        {"filter": "Year_Selection == null || datum.census_year == Year_Selection"},
         {"aggregate": [
             {"op": "sum","field":"number_of_seats","as":"total_seats"},
             {"op":"count", "as":"cafe_count"}
