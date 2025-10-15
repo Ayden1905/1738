@@ -1,0 +1,53 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data":{ "url":"cafes-and-restaurants-with-seating-capacity.csv"
+    },
+    "width":"container",
+    "height":"container",
+    "mark":"bar",
+    "title":"bar_chart",
+    "transform": [
+        {"aggregate": [
+            {"op": "sum","field":"number_of_seats","as":"total_seats"},
+            {"op":"count", "as":"cafe_count"}
+        ],
+        "groupby": ["clue_small_area"]
+    }
+    ],
+    "encoding": {
+        "x":{
+            "field":"clue_small_area",
+            "type":"nominal",
+            "title":"Suburbs"
+        },
+        "y":{
+            "field":"total_seats",
+            "type":"quantitative",
+            "title":"Total number of seats"
+        },
+        "tooltip": [
+            {"field":"clue_small_area","title":"Suburb"},
+            {"field":"total_seats","title":"Total Seats"},
+            {"field":"cafe_count","title":"Number of Cafes"}
+        ],
+        "color":{
+            "field":"clue_small_area",
+            "type":"nominal",
+            "scale":{
+                "range": [
+                    "#006BA4",
+                    "#FF800E",
+                    "#ABABAB",
+                    "#595959",
+                    "#5F9ED1",
+                    "#C85200",
+                    "#898989",
+                    "#A2C8EC",
+                    "#FFBC79",
+                    "#CFCFCF"
+                ]
+            }
+        }
+        },
+        "config": {}
+    }
