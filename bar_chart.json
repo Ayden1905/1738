@@ -11,7 +11,55 @@
             {"op":"count", "as":"cafe_count"}
         ],
         "groupby": ["clue_small_area"]
-    }
+    },
+    {"filter": "Year Selection == null || datum.census_year == Year Selection"}
+    ],
+    "params": [
+        {
+            "name": "Year Selection",
+            "bind": {
+                "input": "select",
+                "options": [
+                    null,
+                    "2017",
+                    "2016",
+                    "2015",
+                    "2014",
+                    "2013",
+                    "2012",
+                    "2011",
+                    "2010",
+                    "2009",
+                    "2008",
+                    "2007",
+                    "2006",
+                    "2005",
+                    "2004",
+                    "2003",
+                    "2002"
+                ],
+                "labels": [
+                    "Show All",
+                    "2017",
+                    "2016",
+                    "2015",
+                    "2014",
+                    "2013",
+                    "2012",
+                    "2011",
+                    "2010",
+                    "2009",
+                    "2008",
+                    "2007",
+                    "2006",
+                    "2005",
+                    "2004",
+                    "2003",
+                    "2002"
+                ],
+                "name": "Year Selection"
+            }
+        }
     ],
     "encoding": {
         "x":{
