@@ -4,7 +4,7 @@
     },
     "width":"container",
     "mark":"bar",
-    "title":"bar_chart",
+    "title":"Seating Versus Suburb",
     "transform": [
         {"aggregate": [
             {"op": "sum","field":"number_of_seats","as":"total_seats"},
