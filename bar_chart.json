@@ -73,7 +73,7 @@
             "title":"Suburbs"
         },
         "y":{
-            "field":"total_seats",
+            "field":"avg_seats_to_cafe",
             "type":"quantitative",
             "title":"Total number of seats"
         },
