@@ -59,6 +59,10 @@
             {"op":"count", "as":"cafe_count"}
         ],
         "groupby": ["clue_small_area"]
+    },
+    {
+        "calculate": "datum.total_seats / datum.cafe_count",
+        "as": "avg_seats_to_cafe"
     }
     ],
 
