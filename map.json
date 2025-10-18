@@ -30,7 +30,7 @@
             "data":{
                 "url": "cafes-and-restaurants-with-seating-capacity.csv"},
             "transform": [
-                { "filter": "datum.year == Year_Selection" }
+                { "filter": "datum.census_year == Year_Selection" }
             ],
             "mark":{"type": "circle","tooltip":{"content":"data"}},
             "encoding": {
