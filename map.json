@@ -21,7 +21,7 @@
     "layer": [
         {
             "data":{
-                "url": "./SAL_2021_AUST_GDA94.topojson",
+                "url": "./SAL_2021_AUST_GDA94.json",
                 "format":{"type": "topojson","feature": "SAL_2021_AUST_GDA94"}
             },
             "mark":{"type": "geoshape","fill":"lightslategray","stroke":"white"}
@@ -31,7 +31,7 @@
                 "url": "cafes-and-restaurants-with-seating-capacity.csv"},
             "transform": [
                 { "filter": "datum.census_year == Year_Selection" },
-                {"filter":"datum.industry_anzsic4_description == Cafes and Restaurants||datum.industry_anzsic4_description == Takeaway Food Services||datum.industry_anzsic4_description == null"}
+                {"filter":"datum.industry_anzsic4_description == Cafes and Restaurants||datum.industry_anzsic4_description == Takeaway Food Services"}
             ],
             "mark":{"type": "circle","tooltip":{"content":"data"}},
             "encoding": {
@@ -54,4 +54,3 @@
         
     ]
 }
-
