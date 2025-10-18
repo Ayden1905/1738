@@ -1,0 +1,55 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "the_map",
+    "width": "container",
+    "params": [
+        {
+            "name": "Year_Selection",
+            "value": 2002,
+            "bind": {
+                "input": "range",
+                "min": 2002,
+                "max":2017,
+                "step":1,
+                "name": "Year: "
+            }
+        }
+    ],
+    "projection": {
+        "type":"mercator"
+    },
+    "layer": [
+        {
+            "data":{
+                "url": "./victoria.json",
+                "format":{"type": "topojson","feature": "STE_2021_AUST_GDA2020"}
+            },
+            "mark":{"type": "geoshape","fill":"lightslategray","stroke":"white"}
+        },
+        {
+            "data":{
+                "url": "cafes-and-restaurants-with-seating-capacity.csv"},
+            "transform": [
+                { "filter": "datum.year == Year_Selection" }
+            ],
+            "mark":{"type": "circle","tooltip":{"content":"data"}},
+            "encoding": {
+                "longitude":{"field":"longitude","type": "quantitative"},
+                "latitude":{"field":"latitude","type": "quantitative"},
+            "color":{
+                "field":"industry_anzsic4_description",
+                "type": "nominal",
+                "title": "Industries",
+                "scale": {
+                    "range":[
+                        "#FFA500",
+                        "#0000FF",
+                        "#008080"
+                    ]
+                }
+            }
+            }
+        }
+        
+    ]
+}
