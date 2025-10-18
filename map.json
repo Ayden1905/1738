@@ -21,7 +21,7 @@
     "layer": [
         {
             "data":{
-                "url": "./victoria.json",
+                "url": "./SAL_2021_AUST_GDA94.json",
                 "format":{"type": "topojson","feature": "SAL_2021_AUST_GDA94"}
             },
             "mark":{"type": "geoshape","fill":"lightslategray","stroke":"white"}
