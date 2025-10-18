@@ -40,13 +40,7 @@
 
     <div class="pure-g">
       <div class="pure-u-1-2">
-        <div class="description description-left">
-          <h2>Seating Capacity of cafes and resturants in Melbourne</h2>
-          <p>Unfortunately despite the large number of cafes within Melbourne, many are turning towards a more takeaway experience,
-          where you order a coffee and leave, instead of sitting down in the cafe. Likewise, many resturants are leaning towards this apporach as well,
-          encouraging take-away rather than eating in. Looking at the bar chart, it can be seen that CBD(Centeral Business District) dominates compared to other suburbs,
-          holding the lead for most cafes regardless of the year, which is not surprising and expected. Docklands follows in second place, and in third comes
-          Southbank, all of which are major hubs for Melbournians.</p>
+        <div id="vis2" class="vis-container"></div>
         </div>
       </div>
       <div class="pure-u-1-2">
@@ -56,12 +50,15 @@
 
   <script type="text/javascript">
     var specVis1 = "./bar_chart.json";
+    var specVis2 = "./pie_chart.json";
 
     vegaEmbed('#vis1', specVis1, { "actions": false });
+    vegaEmbed('#vis2', specVis2, { "actions": false });
   </script>
 </body>
 
 </html>
+
 
 
 
