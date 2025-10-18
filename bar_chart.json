@@ -75,11 +75,11 @@
         "y":{
             "field":"avg_seats_to_cafe",
             "type":"quantitative",
-            "title":"Total number of seats"
+            "title":"Average seats to cafe"
         },
         "tooltip": [
             {"field":"clue_small_area","title":"Suburb"},
-            {"field":"avg_seats_to_cafe","title":"Average seats to cafe"},
+            {"field":"total_seats","title":"Total seats"},
             {"field":"cafe_count","title":"Number of Cafes"}
         ],
         "color":{
