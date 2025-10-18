@@ -31,7 +31,7 @@
                 "url": "cafes-and-restaurants-with-seating-capacity.csv"},
             "transform": [
                 { "filter": "datum.census_year == Year_Selection" },
-                {"filter":"datum.industry_anzsic4_description == Cafes and restaurants||datum.industry_anzsic4_description == Takeaway Food Services||datum.industry_anzsic4_description == null"}
+                {"filter":"datum.industry_anzsic4_description == Cafes and Restaurants||datum.industry_anzsic4_description == Takeaway Food Services||datum.industry_anzsic4_description == null"}
             ],
             "mark":{"type": "circle","tooltip":{"content":"data"}},
             "encoding": {
