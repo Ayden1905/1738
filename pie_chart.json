@@ -24,7 +24,6 @@
     "color":{
             "field":"clue_small_area",
             "type":"nominal",
-            "legend":null,
             "scale":{
                 "range": [
                     "#006BA4",
@@ -50,3 +49,4 @@
 "config": {}
 
 }
+
