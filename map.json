@@ -34,7 +34,8 @@
                 {"filter":{"field": "industry_anzsic4_description",
                 "oneOf":["Cafes and Restaurants","Takeaway Food Services"]
                 }
-            }
+            },
+            {"filter":"datum.longitude >= 144.8 && datum.longitude<=145.15 && datum.latitude >=37.65 && datum.latitude <=38.06"}
             ],
             "mark":{"type": "circle","tooltip":{"content":"data"}},
             "encoding": {
@@ -47,8 +48,7 @@
                 "scale": {
                     "range":[
                         "#FFA500",
-                        "#0000FF",
-                        "#008080"
+                        "#0000FF"
                     ]
                 }
             }
