@@ -16,7 +16,8 @@
         }
     ],
     "projection": {
-        "type":"mercator"
+        "type":"mercator",
+        "center":[144.9631,-378136]
     },
     "layer": [
         {
