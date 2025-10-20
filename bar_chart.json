@@ -1,5 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "background":"rgba(255,255,255,0.8)",
     "data":{ "url":"cafes-and-restaurants-with-seating-capacity.csv"
     },
     "width":"container",
@@ -104,6 +105,7 @@
         },
         "config": {}
     }
+
 
 
 
