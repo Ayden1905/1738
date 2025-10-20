@@ -52,7 +52,7 @@
             },
             {"filter":"datum.longitude >= 144.8 && datum.longitude<=145.15 && datum.latitude <=-37.65 && datum.latitude >=-38.06 && datum.longitude != null && datum.latitude != null"}
             ],
-            "mark":{"type": "circle","tooltip":{"content":"data"}},
+            "mark":{"type": "circle"},
             "encoding": {
                 "longitude":{"field":"longitude","type": "quantitative"},
                 "latitude":{"field":"latitude","type": "quantitative"},
@@ -66,13 +66,17 @@
                         "#0000FF"
                     ]
                 }
-            }
+            },
+            "tooltip":[
+            {"field":"building_address","title":"Address"},
+            {"field":"trading_name","title":"Name"},
+            {"field":"number_of_seats","title":"Number of seats"}
+        ]
             }
         }
     ]
 
 }
-
 
 
 
