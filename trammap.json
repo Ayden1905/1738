@@ -16,7 +16,7 @@
         },
         {
             "name": "zoom_level",
-            "value":"80000",
+            "value":80000,
             "bind":{
                 "input": "range",
                 "min":70000,
@@ -44,7 +44,7 @@
             "data":{"url": "./tram-tracks.geojson","format":{"type": "json"}},
             "mark":{
                 "type": "geoshape",
-                "fill": "null",
+                "fill": null,
                 "stroke":"aqua"
             }
         },
@@ -88,8 +88,8 @@
                     "sort": [{"field": "number_of_seats","order":"descending"}]
                 },
                 {"filter":"datum.ranking==1" },
-                {"calculate": "The resturant/cafe with the highest seating capacity in this year is: +datum['total_ seats']", "as": "text_annotation_r"},
-                {"calculate": "split(datun.text_annotation_r, ';')","as": "text_annotation"}
+                {"calculate": "The resturant/cafe with the highest seating capacity in this year is: +datum['number_of_seats']", "as": "text_annotation_r"},
+                {"calculate": "split(datum.text_annotation_r, ';')","as": "text_annotation"}
             ],
             "mark":{
                 "type": "text",
