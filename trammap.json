@@ -93,7 +93,7 @@
                     "sort": [{"field": "number_of_seats","order":"descending"}]
                 },
                 {"filter":"datum.ranking==1" },
-                {"calculate": "The resturant/cafe with the highest seating capacity in this year is: +datum['number_of_seats']", "as": "text_annotation_r"}
+                {"calculate": "'The resturant/cafe with the highest seating capacity in this year is: ' + datum['number_of_seats']", "as": "text_annotation"}
             ],
             "mark":{
                 "type": "text",
