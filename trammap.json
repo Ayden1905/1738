@@ -15,15 +15,22 @@
             }
         },
         {
-            "name": "Type_Selection",
-            "value":"select"
+            "name": "zoom_level",
+            "value":"80000",
+            "bind":{
+                "input": "range",
+                "min":70000,
+                "max":160000,
+                "step":1000,
+                "name":"Zoom"
+            }
             
         }
     ],
     "projection": {
         "type":"mercator",
         "center":[144.9631,-37.8136],
-        "scale": 1200000
+        "scale": {"expr": "zoom_level"}
     },
     "layer": [
         {
