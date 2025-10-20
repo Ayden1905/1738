@@ -91,7 +91,9 @@
                 {"filter":"datum.longitude >= 144.8 && datum.longitude<=145.15 && datum.latitude <=-37.65 && datum.latitude >=-38.06 && datum.longitude != null && datum.latitude != null"},
                 {
                     "window": [{"op":"rank","as": "ranking"}],
-                    "sort": [{"field": "number_of_seats","order":"descending"}]
+                    "sort": [{"field": "number_of_seats","order":"descending"},{
+                        "field": "trading_name","order":"ascending"
+                    }]
                 },
                 {"filter":"datum.ranking==1" },
                 {"calculate": "'The resturant/cafe with the highest seating capacity in this year is: ' + datum['number_of_seats']+ ' seats'", "as": "text_annotation"}
