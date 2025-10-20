@@ -1,0 +1,73 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "the_map",
+    "width": "container",
+    "params": [
+        {
+            "name": "Year_Selection",
+            "value": 2002,
+            "bind": {
+                "input": "range",
+                "min": 2002,
+                "max":2017,
+                "step":1,
+                "name": "Year: "
+            }
+        },
+        {
+            "name": "Type_Selection",
+            "value":"select"
+            
+        }
+    ],
+    "projection": {
+        "type":"mercator",
+        "center":[144.9631,-37.8136],
+        "scale": 70000
+    },
+    "layer": [
+        {
+            "data":{
+                "url": "./SAL_2021_AUST_GDA94.json",
+                "format":{"type": "topojson","feature": "SAL_2021_AUST_GDA94"}
+            },
+            "mark":{"type": "geoshape","fill":"lightslategray","stroke":"white"}
+        },
+        {
+            "data":{"url": "./city-circle-tram-stops.geojson","format":{"type": "json"}},
+            "mark":{
+                "type": "geoshape",
+                "fill": "null",
+                "stroke":"aqua"
+            }
+        },
+        {
+            "data":{
+                "url": "cafes-and-restaurants-with-seating-capacity.csv"},
+            "transform": [
+                { "filter": "datum.census_year == Year_Selection" },
+                {"filter":{"field": "industry_anzsic4_description",
+                "oneOf":["Cafes and Restaurants","Takeaway Food Services"]
+                }
+            },
+            {"filter":"datum.longitude >= 144.8 && datum.longitude<=145.15 && datum.latitude <=-37.65 && datum.latitude >=-38.06 && datum.longitude != null && datum.latitude != null"}
+            ],
+            "mark":{"type": "circle","tooltip":{"content":"data"}},
+            "encoding": {
+                "longitude":{"field":"longitude","type": "quantitative"},
+                "latitude":{"field":"latitude","type": "quantitative"},
+            "color":{
+                "field":"industry_anzsic4_description",
+                "type": "nominal",
+                "title": "Industries",
+                "scale": {
+                    "range":[
+                        "#FFA500",
+                        "#0000FF"
+                    ]
+                }
+            }
+            }
+        }
+    ]
+}
