@@ -47,7 +47,7 @@
             "transform": [
                 { "filter": "datum.census_year == Year_Selection" },
                 {"filter":{"field": "industry_anzsic4_description",
-                "oneOf":["Cafes and Restaurants","Takeaway Food Services"]
+                "oneOf":["Cafes and Restaurants"]
                 }
             },
             {"filter":"datum.longitude >= 144.8 && datum.longitude<=145.15 && datum.latitude <=-37.65 && datum.latitude >=-38.06 && datum.longitude != null && datum.latitude != null"}
@@ -70,4 +70,5 @@
             }
         }
     ]
+
 }
