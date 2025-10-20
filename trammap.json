@@ -34,7 +34,7 @@
             "mark":{"type": "geoshape","fill":"lightslategray","stroke":"white"}
         },
         {
-            "data":{"url": "./city-circle-tram-route.geojson","format":{"type": "json"}},
+            "data":{"url": "./tram-tracks.geojson","format":{"type": "json"}},
             "mark":{
                 "type": "geoshape",
                 "fill": "null",
@@ -72,6 +72,7 @@
     ]
 
 }
+
 
 
 
