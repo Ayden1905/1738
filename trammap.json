@@ -84,13 +84,16 @@
         {
             "data":{"url": "cafes-and-restaurants-with-seating-capacity.csv"},
             "transform": [
+                { "filter": "datum.census_year == Year_Selection" },
+                {"filter":{"field": "industry_anzsic4_description",
+                "oneOf":["Cafes and Restaurants","Takeaway Food Services"]}},
+                {"filter":"datum.longitude >= 144.8 && datum.longitude<=145.15 && datum.latitude <=-37.65 && datum.latitude >=-38.06 && datum.longitude != null && datum.latitude != null"},
                 {
                     "window": [{"op":"rank","as": "ranking"}],
                     "sort": [{"field": "number_of_seats","order":"descending"}]
                 },
                 {"filter":"datum.ranking==1" },
-                {"calculate": "The resturant/cafe with the highest seating capacity in this year is: +datum['number_of_seats']", "as": "text_annotation_r"},
-                {"calculate": "split(datum.text_annotation_r, ';')","as": "text_annotation"}
+                {"calculate": "The resturant/cafe with the highest seating capacity in this year is: +datum['number_of_seats']", "as": "text_annotation_r"}
             ],
             "mark":{
                 "type": "text",
@@ -100,7 +103,10 @@
                 "baseline":"middle",
                 "fontStyle":"italic"
             },
-            "encoding": {"text":{"field":"text_annotation"}}
+            "encoding": {
+                "longitude":{"field":"longitude","type": "quantitative"},
+                "latitude":{"field":"latitude","type": "quantitative"},
+                "text":{"field":"text_annotation"}}
         }
     ]
 
