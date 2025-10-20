@@ -68,7 +68,7 @@
 
     "encoding": {
         "x":{
-            "field":"clue_small_area",
+            "field":"census_year",
             "type":"nominal",
             "title":"Suburbs"
         },
