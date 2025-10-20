@@ -1,6 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
     "data":{ "url":"cafes-and-restaurants-with-seating-capacity.csv"},
+    "background":"rgba(255,255,255,0.8)",
     "title":"% of seating of total seating in suburbs",
     "width":"container",
     "transform": [
@@ -51,6 +52,7 @@
 "config": {}
 
 }
+
 
 
 
