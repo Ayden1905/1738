@@ -9,109 +9,112 @@
             "bind": {
                 "input": "range",
                 "min": 2002,
-                "max":2017,
-                "step":1,
+                "max": 2017,
+                "step": 1,
                 "name": "Year: "
             }
         },
         {
             "name": "zoom_level",
-            "value":80000,
-            "bind":{
+            "value": 80000,
+            "bind": {
                 "input": "range",
-                "min":70000,
-                "max":160000,
-                "step":1000,
-                "name":"Zoom"
+                "min": 70000,
+                "max": 160000,
+                "step": 1000,
+                "name": "Zoom"
             }
-            
         }
     ],
     "projection": {
-        "type":"mercator",
-        "center":[144.9631,-37.8136],
+        "type": "mercator",
+        "center": [144.9631, -37.8136],
         "scale": {"expr": "zoom_level"}
     },
     "layer": [
         {
-            "data":{
+            "data": {
                 "url": "./SAL_2021_AUST_GDA94.json",
-                "format":{"type": "topojson","feature": "SAL_2021_AUST_GDA94"}
+                "format": {"type": "topojson", "feature": "SAL_2021_AUST_GDA94"}
             },
-            "mark":{"type": "geoshape","fill":"lightslategray","stroke":"white"}
+            "mark": {"type": "geoshape", "fill": "lightslategray", "stroke": "white"}
         },
         {
-            "data":{"url": "./tram-tracks.geojson","format":{"type": "json"}},
-            "mark":{
+            "data": {"url": "./tram-tracks.geojson", "format": {"type": "json"}},
+            "mark": {
                 "type": "geoshape",
                 "fill": null,
-                "stroke":"aqua"
+                "stroke": "aqua"
             }
         },
         {
-            "data":{
-                "url": "cafes-and-restaurants-with-seating-capacity.csv"},
-            "transform": [
-                { "filter": "datum.census_year == Year_Selection" },
-                {"filter":{"field": "industry_anzsic4_description",
-                "oneOf":["Cafes and Restaurants","Takeaway Food Services"]
-                }
+            "data": {
+                "url": "cafes-and-restaurants-with-seating-capacity.csv"
             },
-            {"filter":"datum.longitude >= 144.8 && datum.longitude<=145.15 && datum.latitude <=-37.65 && datum.latitude >=-38.06 && datum.longitude != null && datum.latitude != null"}
-            ],
-            "mark":{"type": "circle"},
-            "encoding": {
-                "longitude":{"field":"longitude","type": "quantitative"},
-                "latitude":{"field":"latitude","type": "quantitative"},
-            "color":{
-                "field":"industry_anzsic4_description",
-                "type": "nominal",
-                "title": "Industries",
-                "scale": {
-                    "range":[
-                        "#FFA500",
-                        "#0000FF"
-                    ]
-                }
-            },
-            "tooltip":[
-            {"field":"building_address","title":"Address"},
-            {"field":"trading_name","title":"Name"},
-            {"field":"number_of_seats","title":"Number of seats"}
-        ]
-            }
-        },
-        {
-            "data":{"url": "cafes-and-restaurants-with-seating-capacity.csv"},
             "transform": [
-                { "filter": "datum.census_year == Year_Selection" },
-                {"filter":{"field": "industry_anzsic4_description",
-                "oneOf":["Cafes and Restaurants","Takeaway Food Services"]}},
-                {"filter":"datum.longitude >= 144.8 && datum.longitude<=145.15 && datum.latitude <=-37.65 && datum.latitude >=-38.06 && datum.longitude != null && datum.latitude != null"},
+                {"filter": "datum.census_year == Year_Selection"},
                 {
-                    "window": [{"op":"rank","as": "ranking"}],
-                    "sort": [{"field": "number_of_seats","order":"descending"}]
+                    "filter": {
+                        "field": "industry_anzsic4_description",
+                        "oneOf": ["Cafes and Restaurants", "Takeaway Food Services"]
+                    }
                 },
-                {"filter":"datum.ranking==1" },
-                {"calculate": "'The resturant/cafe with the highest seating capacity in this year is: ' + datum['number_of_seats']", "as": "text_annotation"}
+                {"filter": "datum.longitude >= 144.8 && datum.longitude <= 145.15 && datum.latitude <= -37.65 && datum.latitude >= -38.06 && datum.longitude != null && datum.latitude != null"}
             ],
-            "mark":{
+            "mark": {"type": "circle"},
+            "encoding": {
+                "longitude": {"field": "longitude", "type": "quantitative"},
+                "latitude": {"field": "latitude", "type": "quantitative"},
+                "color": {
+                    "field": "industry_anzsic4_description",
+                    "type": "nominal",
+                    "title": "Industries",
+                    "scale": {
+                        "range": ["#FFA500", "#0000FF"]
+                    }
+                },
+                "tooltip": [
+                    {"field": "building_address", "title": "Address"},
+                    {"field": "trading_name", "title": "Name"},
+                    {"field": "number_of_seats", "title": "Number of seats"}
+                ]
+            }
+        },
+        {
+            "data": {"url": "cafes-and-restaurants-with-seating-capacity.csv"},
+            "transform": [
+                {"filter": "datum.census_year == Year_Selection"},
+                {
+                    "filter": {
+                        "field": "industry_anzsic4_description",
+                        "oneOf": ["Cafes and Restaurants", "Takeaway Food Services"]
+                    }
+                },
+                {"filter": "datum.longitude >= 144.8 && datum.longitude <= 145.15 && datum.latitude <= -37.65 && datum.latitude >= -38.06 && datum.longitude != null && datum.latitude != null"},
+                {
+                    "window": [{"op": "rank", "as": "ranking"}],
+                    "sort": [{"field": "number_of_seats", "order": "descending"}]
+                },
+                {"filter": "datum.ranking == 1"},
+                {"calculate": "'Highest seating capacity: ' + datum['trading_name'] + ' (' + datum['number_of_seats'] + ' seats)'", "as": "text_annotation"}
+            ],
+            "mark": {
                 "type": "text",
-                "align":"left",
-                "dx":-8,
-                "dy":-8,
-                "baseline":"middle",
-                "fontStyle":"italic"
+                "align": "left",
+                "dx": 5,
+                "dy": -10,
+                "baseline": "middle",
+                "fontStyle": "italic",
+                "fontSize": 12,
+                "fill": "black",
+                "stroke": "white",
+                "strokeWidth": 3
             },
             "encoding": {
-                "longitude":{"field":"longitude","type": "quantitative"},
-                "latitude":{"field":"latitude","type": "quantitative"},
-                "text":{"field":"text_annotation"}}
+                "longitude": {"field": "longitude", "type": "quantitative"},
+                "latitude": {"field": "latitude", "type": "quantitative"},
+                "text": {"field": "text_annotation"}
+            }
         }
     ]
-
 }
-
-
-
-
