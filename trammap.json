@@ -54,7 +54,7 @@
             "transform": [
                 { "filter": "datum.census_year == Year_Selection" },
                 {"filter":{"field": "industry_anzsic4_description",
-                "oneOf":["Cafes and Restaurants"]
+                "oneOf":["Cafes and Restaurants","Takeaway Food Services"]
                 }
             },
             {"filter":"datum.longitude >= 144.8 && datum.longitude<=145.15 && datum.latitude <=-37.65 && datum.latitude >=-38.06 && datum.longitude != null && datum.latitude != null"}
@@ -80,11 +80,30 @@
             {"field":"number_of_seats","title":"Number of seats"}
         ]
             }
+        },
+        {
+            "transform": [
+                {
+                    "window": [{"op":"rank","as": "ranking"}],
+                    "sort": [{"field": "number_of_seats","order":"descending"}]
+                },
+                {"filter":"datum.ranking==1" },
+                {"calculate": "The resturant/cafe with the highest seating capacity in this year is: +datum['total_ seats']", "as": "text_annotation_r"},
+                {"calculate": "split(datun.text_annotation_r, ';')","as": "text_annotation"}
+            ],
+            "mark":{
+                "type": "text",
+                "align":"left",
+                "dx":-8,
+                "dy":-8,
+                "baseline":"middle",
+                "fontStyle":"italic"
+            },
+            "encoding": {"text":{"field":"text_annotation"}}
         }
     ]
 
 }
-
 
 
 
