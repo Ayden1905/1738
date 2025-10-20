@@ -1,6 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": "the_map",
+    "background":"rgba(255,255,255,0.8)",
     "width": "container",
     "params": [
         {
