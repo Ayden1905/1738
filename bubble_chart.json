@@ -10,7 +10,7 @@
             {"op": "sum","field":"number_of_seats","as":"total_seats"},
             {"op":"count", "as":"cafe_count"}
         ],
-        "groupby": ["clue_small_area"]
+        "groupby": ["clue_small_area","census_year"]
     },
     {
         "calculate": "datum.total_seats / datum.cafe_count",
