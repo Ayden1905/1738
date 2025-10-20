@@ -82,6 +82,7 @@
             }
         },
         {
+            "data":{"url": "cafes-and-restaurants-with-seating-capacity.csv"},
             "transform": [
                 {
                     "window": [{"op":"rank","as": "ranking"}],
