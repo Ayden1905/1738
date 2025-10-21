@@ -6,7 +6,7 @@
     "mark":{"type":"circle"},
     "title":"Cafes and resturants per suburb through the years",
     "transform": [
-        {"filter":"industry_anzsic4_description==Cafes and Restaurants"},
+        {"filter":"industry_anzsic4_description=='Cafes and Restaurants'"},
         {"aggregate": [
             {"op": "sum","field":"number_of_seats","as":"total_seats"},
             {"op":"count", "as":"cafe_count"}
@@ -23,7 +23,7 @@
         "x":{
             "field":"census_year",
             "type":"nominal",
-            "title":"Suburbs"
+            "title":"Years"
         },
         "y":{
             "field":"avg_seats_to_cafe",
