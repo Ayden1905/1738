@@ -1,5 +1,5 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "data":{ "url":"cafes-and-restaurants-with-seating-capacity.csv"},
     "background":"rgba(255,255,255,0.8)",
     "title":"% of seating of total seating in suburbs",
@@ -52,10 +52,10 @@
 }
 },
 {
-    "mark":{"type":"text","radius":110,"fontSize":10,"fill":"black"},
+    "mark":{"type":"text","radius":110,"fill":"black"},
     "encoding": {
         "theta":{"field":"percentage","type": "quantitative","stack":true},
-        "text":{"field":"percentage","type": "quantitative","format":".1f%"}
+        "text":{"field":"percentage","type": "quantitative","format":".1f"}
     }
 }
 ],
