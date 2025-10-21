@@ -52,7 +52,10 @@
 }
 },
 {
-    "mark":{"type":"text","radius":150,"fill":"black"},
+    "transform": [
+        {"filter":"datum.percentage > 3"}
+    ],
+    "mark":{"type":"text","radius":110,"fill":"black"},
     "encoding": {
         "theta":{"field":"percentage","type": "quantitative","stack":true},
         "text":{"field":"percentage","type": "quantitative","format":".1f"}
@@ -62,7 +65,6 @@
 "config": {}
 
 }
-
 
 
 
