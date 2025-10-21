@@ -17,6 +17,7 @@
         "calculate": "datum.cafe_count/datum.total_cafes*100", "as": "percentage"
     }
     ],
+    "layer":[{
     "mark": "arc",
     "encoding":{
         "theta":{
@@ -48,10 +49,20 @@
     {"field":"total_seats","title":"Total seats"},
     {"field":"cafe_count","title":"Number of Cafes"}
     ]
+}
 },
+{
+    "mark":{"type":"text","radius":110,"fontSize":10,"fill":"black"},
+    "encoding": {
+        "theta":{"field":"percentage","type": "quantitative","stack":true},
+        "text":{"field":"percentage","type": "quantitative","format":".1f%"}
+    }
+}
+],
 "config": {}
 
 }
+
 
 
 
