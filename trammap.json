@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Map of Cafes,Resturats and takeaways locations, alongside tram lines in Inner City Melbourne.",
+    "title": "Map of Cafes,Resturants and takeaways locations, alongside tram lines in Inner City Melbourne.",
     "width": "container",
     "params": [
         {
@@ -54,7 +54,7 @@
             "transform": [
                 { "filter": "datum.census_year == Year_Selection" },
                 {"filter":{"field": "industry_anzsic4_description",
-                "oneOf":["Cafes and Restaurants"]
+                "oneOf":["Cafes and Restaurants","Takeaway Food Services"]
                 }
             },
             {"filter":"datum.longitude >= 144.8 && datum.longitude<=145.15 && datum.latitude <=-37.65 && datum.latitude >=-38.06 && datum.longitude != null && datum.latitude != null"}
