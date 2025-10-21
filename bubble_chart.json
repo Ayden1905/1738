@@ -2,7 +2,6 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "data":{ "url":"cafes-and-restaurants-with-seating-capacity.csv"
     },
-    "background":"rgba(255,255,255,0.8)",
     "width":"container",
     "mark":{"type":"circle"},
     "title":"Seating Versus Suburb",
@@ -36,8 +35,10 @@
             {"field":"cafe_count","title":"Number of Cafes"}
         ],
         "color":{
+            "title":"Suburbs",
             "field":"clue_small_area",
             "type":"nominal",
+            "legend":null,
             "scale":{
                 "range": [
                     "#006BA4",
@@ -60,8 +61,6 @@
         },
         "config": {}
     }
-
-
 
 
 
