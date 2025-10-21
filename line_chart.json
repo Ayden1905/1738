@@ -33,6 +33,7 @@
             ],
             "color":{
                 "field":"industry_anzsic4_description",
+                "title":"Industries",
                 "type":"nominal",
                 "scale":{
                     "range":[
