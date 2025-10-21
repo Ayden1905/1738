@@ -1,113 +1,109 @@
-{
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "background":"rgba(255,255,255,0.8)",
-    "data":{ "url":"cafes-and-restaurants-with-seating-capacity.csv"
-    },
-    "width":"container",
-    "mark":"bar",
-    "title":"Seating Versus Suburb",
-    "params": [
-        {
-            "name": "Year_Selection",
-            "bind": {
-                "input": "select",
-                "options": [
-                    null,
-                    2017,
-                    2016,
-                    2015,
-                    2014,
-                    2013,
-                    2012,
-                    2011,
-                    2010,
-                    2009,
-                    2008,
-                    2007,
-                    2006,
-                    2005,
-                    2004,
-                    2003,
-                    2002
-                ],
-                "labels": [
-                    "Show All",
-                    "2017",
-                    "2016",
-                    "2015",
-                    "2014",
-                    "2013",
-                    "2012",
-                    "2011",
-                    "2010",
-                    "2009",
-                    "2008",
-                    "2007",
-                    "2006",
-                    "2005",
-                    "2004",
-                    "2003",
-                    "2002"
-                ],
-                "name": "Year_Selection"
-            }
-        }
-    ],
-    "transform": [
-        {"filter": "Year_Selection == null || datum.census_year == Year_Selection"},
-        {"aggregate": [
-            {"op": "sum","field":"number_of_seats","as":"total_seats"},
-            {"op":"count", "as":"cafe_count"}
-        ],
-        "groupby": ["clue_small_area"]
-    },
     {
-        "calculate": "datum.total_seats / datum.cafe_count",
-        "as": "avg_seats_to_cafe"
-    }
-    ],
-
-    "encoding": {
-        "x":{
-            "field":"clue_small_area",
-            "type":"nominal",
-            "title":"Suburbs"
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "data":{ "url":"cafes-and-restaurants-with-seating-capacity.csv"
         },
-        "y":{
-            "field":"avg_seats_to_cafe",
-            "type":"quantitative",
-            "title":"Average seats to cafe"
-        },
-        "tooltip": [
-            {"field":"clue_small_area","title":"Suburb"},
-            {"field":"total_seats","title":"Total seats"},
-            {"field":"cafe_count","title":"Number of Cafes"}
-        ],
-        "color":{
-            "field":"clue_small_area",
-            "type":"nominal",
-            "legend":null,
-            "scale":{
-                "range": [
-                    "#006BA4",
-                    "#FF800E",
-                    "#ABABAB",
-                    "#595959",
-                    "#5F9ED1",
-                    "#C85200",
-                    "#898989",
-                    "#A2C8EC",
-                    "#FFBC79",
-                    "#CFCFCF"
-                ]
+        "width":"container",
+        "mark":"bar",
+        "title":"Average Seating per Cafe for each Suburb",
+        "params": [
+            {
+                "name": "Year_Selection",
+                "bind": {
+                    "input": "select",
+                    "options": [
+                        null,
+                        2017,
+                        2016,
+                        2015,
+                        2014,
+                        2013,
+                        2012,
+                        2011,
+                        2010,
+                        2009,
+                        2008,
+                        2007,
+                        2006,
+                        2005,
+                        2004,
+                        2003,
+                        2002
+                    ],
+                    "labels": [
+                        "Show All",
+                        "2017",
+                        "2016",
+                        "2015",
+                        "2014",
+                        "2013",
+                        "2012",
+                        "2011",
+                        "2010",
+                        "2009",
+                        "2008",
+                        "2007",
+                        "2006",
+                        "2005",
+                        "2004",
+                        "2003",
+                        "2002"
+                    ],
+                    "name": "Year_Selection"
+                }
             }
-        }
+        ],
+        "transform": [
+            {"filter": "Year_Selection == null || datum.census_year == Year_Selection"},
+            {"aggregate": [
+                {"op": "sum","field":"number_of_seats","as":"total_seats"},
+                {"op":"count", "as":"cafe_count"}
+            ],
+            "groupby": ["clue_small_area"]
         },
-        "config": {}
-    }
+        {
+            "calculate": "datum.total_seats / datum.cafe_count",
+            "as": "avg_seats_to_cafe"
+        }
+        ],
 
-
-
+        "encoding": {
+            "x":{
+                "field":"clue_small_area",
+                "type":"nominal",
+                "title":"Suburbs"
+            },
+            "y":{
+                "field":"avg_seats_to_cafe",
+                "type":"quantitative",
+                "title":"Average seats to cafe"
+            },
+            "tooltip": [
+                {"field":"clue_small_area","title":"Suburb"},
+                {"field":"total_seats","title":"Total seats"},
+                {"field":"cafe_count","title":"Number of Cafes"}
+            ],
+            "color":{
+                "field":"clue_small_area",
+                "type":"nominal",
+                "legend":null,
+                "scale":{
+                    "range": [
+                        "#006BA4",
+                        "#FF800E",
+                        "#ABABAB",
+                        "#595959",
+                        "#5F9ED1",
+                        "#C85200",
+                        "#898989",
+                        "#A2C8EC",
+                        "#FFBC79",
+                        "#CFCFCF"
+                    ]
+                }
+            }
+            },
+            "config": {}
+        }
 
 
 
