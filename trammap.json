@@ -1,7 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "the_map",
-    "background":"rgba(255,255,255,0.8)",
+    "title": "Map of Cafes,Resturats and takeaways locations, alongside tram lines in Inner City Melbourne.",
     "width": "container",
     "params": [
         {
@@ -17,11 +16,11 @@
         },
         {
             "name": "zoom_level",
-            "value":120000,
+            "value":"80000",
             "bind":{
                 "input": "range",
-                "min":120000,
-                "max":200000,
+                "min":70000,
+                "max":160000,
                 "step":1000,
                 "name":"Zoom"
             }
@@ -45,8 +44,8 @@
             "data":{"url": "./tram-tracks.geojson","format":{"type": "json"}},
             "mark":{
                 "type": "geoshape",
-                "fill": null,
-                "stroke":"aqua"
+                "fill": "null",
+                "stroke":"aqua"   
             }
         },
         {
@@ -55,7 +54,7 @@
             "transform": [
                 { "filter": "datum.census_year == Year_Selection" },
                 {"filter":{"field": "industry_anzsic4_description",
-                "oneOf":["Cafes and Restaurants","Takeaway Food Services"]
+                "oneOf":["Cafes and Restaurants"]
                 }
             },
             {"filter":"datum.longitude >= 144.8 && datum.longitude<=145.15 && datum.latitude <=-37.65 && datum.latitude >=-38.06 && datum.longitude != null && datum.latitude != null"}
@@ -81,40 +80,10 @@
             {"field":"number_of_seats","title":"Number of seats"}
         ]
             }
-        },
-        {
-            "data":{"url": "cafes-and-restaurants-with-seating-capacity.csv"},
-            "transform": [
-                { "filter": "datum.census_year == Year_Selection" },
-                {"filter":{"field": "industry_anzsic4_description",
-                "oneOf":["Cafes and Restaurants","Takeaway Food Services"]}},
-                {"filter":"datum.longitude >= 144.8 && datum.longitude<=145.15 && datum.latitude <=-37.65 && datum.latitude >=-38.06 && datum.longitude != null && datum.latitude != null"},
-                {
-                    "window": [{"op":"rank","as": "ranking"}],
-                    "sort": [{"field": "number_of_seats","order":"descending"},{
-                        "field": "trading_name","order":"ascending"
-                    }]
-                },
-                {"filter":"datum.ranking==1" },
-                {"calculate": "'The resturant/cafe with the highest seating capacity in this year is: ' + datum['number_of_seats']+ ' seats'", "as": "text_annotation"}
-            ],
-            "mark":{
-                "type": "text",
-                "align":"left",
-                "dx":-8,
-                "dy":-8,
-                "baseline":"middle",
-                "fontStyle":"italic"
-            },
-            "encoding": {
-                "longitude":{"field":"longitude","type": "quantitative"},
-                "latitude":{"field":"latitude","type": "quantitative"},
-                "text":{"field":"text_annotation"}}
         }
     ]
 
 }
-
 
 
 
