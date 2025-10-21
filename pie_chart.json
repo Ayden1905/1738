@@ -5,6 +5,7 @@
     "title":"% of seating of total seating in suburbs",
     "width":"container",
     "transform": [
+        {"filter":"datum.percentage > 3"},
         {"aggregate": 
         [{"op":"count", "as":"cafe_count"}],
         "groupby": ["clue_small_area"]
@@ -52,9 +53,6 @@
 }
 },
 {
-    "transform": [
-        {"filter":"datum.percentage > 3"}
-    ],
     "mark":{"type":"text","radius":110,"fill":"black"},
     "encoding": {
         "theta":{"field":"percentage","type": "quantitative","stack":true},
