@@ -45,7 +45,7 @@
             "size":
             {"field":"cafe_count",
             "type":"quantitative",
-            "scale":{"range":[100,700]}}
+            "scale":{"range":[50,200]}}
             },
             "config": {}
         }
