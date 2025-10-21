@@ -46,7 +46,7 @@
     },
     "tooltip": [
     {"field":"clue_small_area","title":"Suburb"},
-    {"field":"total_seats","title":"Total seats"},
+    {"field":"percentage","title":"Percentage(%)"},
     {"field":"cafe_count","title":"Number of Cafes"}
     ]
 }
