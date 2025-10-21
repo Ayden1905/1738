@@ -13,10 +13,6 @@
             {"op":"count", "as":"cafe_count"}
         ],
         "groupby": ["industry_anzsic4_description","census_year"]
-    },
-    {
-        "calculate": "datum.total_seats / datum.cafe_count",
-        "as": "avg_seats_to_cafe"
     }
     ],
 
@@ -27,9 +23,9 @@
             "title":"Suburbs"
         },
         "y":{
-            "field":"avg_seats_to_cafe",
+            "field":"cafe_count",
             "type":"quantitative",
-            "title":"Average seats to cafe"
+            "title":"number of locations"
         },
         "tooltip": [
             {"field":"clue_small_area","title":"Suburb"},
