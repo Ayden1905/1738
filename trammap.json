@@ -16,11 +16,11 @@
         },
         {
             "name": "zoom_level",
-            "value":"80000",
+            "value":120000,
             "bind":{
                 "input": "range",
-                "min":70000,
-                "max":160000,
+                "min":120000,
+                "max":200000,
                 "step":1000,
                 "name":"Zoom"
             }
