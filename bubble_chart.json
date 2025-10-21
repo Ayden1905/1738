@@ -56,7 +56,8 @@
             }
         },
         "size":
-        {"field":"cafe_count",
+        {"title":"Cafe Size",
+        "field":"cafe_count",
         "type":"quantitative",
         "scale":{"range":[100,700]}}
         },
