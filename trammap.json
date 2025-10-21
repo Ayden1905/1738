@@ -20,7 +20,7 @@
             "bind":{
                 "input": "range",
                 "min":120000,
-                "max":200000,
+                "max":300000,
                 "step":1000,
                 "name":"Zoom"
             }
