@@ -4,8 +4,9 @@
     },
     "width":"container",
     "mark":{"type":"circle"},
-    "title":"Seating Versus Suburb",
+    "title":"Cafes and resturants per suburb through the years",
     "transform": [
+        {"filter":"industry_anzsic4_description==Cafes and Restaurants"},
         {"aggregate": [
             {"op": "sum","field":"number_of_seats","as":"total_seats"},
             {"op":"count", "as":"cafe_count"}
