@@ -1,63 +1,54 @@
-{
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "data":{ "url":"cafes-and-restaurants-with-seating-capacity.csv"
-    },
-    "width":"container",
-    "mark":"line",
-    "title":"Seating Versus Suburb",
-    "transform": [
-        {"filter":{"field": "industry_anzsic4_description",
-        "oneOf":["Cafes and Restaurants","Takeaway Food Services"]}},
-        {"aggregate": [
-            {"op": "sum","field":"number_of_seats","as":"total_seats"},
-            {"op":"count", "as":"cafe_count"}
+    {
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "data":{ "url":"cafes-and-restaurants-with-seating-capacity.csv"
+        },
+        "width":"container",
+        "mark":"line",
+        "title":"Seating Versus Suburb",
+        "transform": [
+            {"filter":{"field": "industry_anzsic4_description",
+            "oneOf":["Cafes and Restaurants","Takeaway Food Services"]}},
+            {"aggregate": [
+                {"op": "sum","field":"number_of_seats","as":"total_seats"},
+                {"op":"count", "as":"cafe_count"}
+            ],
+            "groupby": ["industry_anzsic4_description","census_year"]
+        }
         ],
-        "groupby": ["industry_anzsic4_description","census_year"]
-    }
-    ],
 
-    "encoding": {
-        "x":{
-            "field":"census_year",
-            "type":"nominal",
-            "title":"Suburbs"
-        },
-        "y":{
-            "field":"cafe_count",
+        "encoding": {
+            "x":{
+                "field":"census_year",
+                "type":"nominal",
+                "title":"Suburbs"
+            },
+            "y":{
+                "field":"cafe_count",
+                "type":"quantitative",
+                "title":"number of locations"
+            },
+            "tooltip": [
+                {"field":"total_seats","title":"Total seats"},
+                {"field":"cafe_count","title":"Number of Cafes"}
+            ],
+            "color":{
+                "field":"industry_anzsic4_description",
+                "type":"nominal",
+                "legend":null,
+                "scale":{
+                    "range":[
+                    "#FFA500",
+                    "#0000FF"
+                    ]
+                }
+            },
+            "size":
+            {"field":"cafe_count",
             "type":"quantitative",
-            "title":"number of locations"
-        },
-        "tooltip": [
-            {"field":"clue_small_area","title":"Suburb"},
-            {"field":"total_seats","title":"Total seats"},
-            {"field":"cafe_count","title":"Number of Cafes"}
-        ],
-        "color":{
-            "field":"clue_small_area",
-            "type":"nominal",
-            "legend":null,
-            "scale":{
-                "range": [
-                    "#006BA4",
-                    "#FF800E",
-                    "#ABABAB",
-                    "#595959",
-                    "#5F9ED1",
-                    "#C85200",
-                    "#898989",
-                    "#A2C8EC",
-                    "#FFBC79",
-                    "#CFCFCF"
-                ]
-            }
-        },
-        "size":
-        {"field":"cafe_count",
-        "type":"quantitative",
-        "scale":{"range":[100,700]}}
-        },
-        "config": {}
-    }
+            "scale":{"range":[100,700]}}
+            },
+            "config": {}
+        }
 
 
 
