@@ -34,18 +34,13 @@
             "color":{
                 "field":"industry_anzsic4_description",
                 "type":"nominal",
-                "legend":null,
                 "scale":{
                     "range":[
                     "#FFA500",
                     "#0000FF"
                     ]
                 }
-            },
-            "size":
-            {"field":"cafe_count",
-            "type":"quantitative",
-            "scale":{"range":[50,200]}}
+            }
             },
             "config": {}
         }
