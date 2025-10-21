@@ -44,7 +44,7 @@
             "data":{"url": "./tram-tracks.geojson","format":{"type": "json"}},
             "mark":{
                 "type": "geoshape",
-                "fill": "null",
+                "fill": null,
                 "stroke":"aqua"   
             }
         },
