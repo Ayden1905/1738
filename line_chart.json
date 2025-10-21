@@ -19,7 +19,7 @@
         "encoding": {
             "x":{
                 "field":"census_year",
-                "type":"nominal",
+                "type":"quantitative",
                 "title":"Suburbs"
             },
             "y":{
